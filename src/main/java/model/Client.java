@@ -1,18 +1,24 @@
 package model;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
-@Entity
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+//@XmlAccessorType(value = XmlAccessType.FIELD)
 @XmlRootElement
-@XmlAccessorType(value = XmlAccessType.FIELD)
+@Entity
 public class Client {
 
 	@Id
@@ -20,6 +26,13 @@ public class Client {
 	private Long id;
 	private String name;
 	private String nickname;
+	private String address;
+	private String postalcode;
+	private String city;
+	private String number;
+
+	//@Embedded
+	private String accompte;
 
 	public Client() {
 		super();
@@ -27,9 +40,18 @@ public class Client {
 
 	public Client(String name, String nickname) {
 		super();
-
 		this.name = name;
 		this.nickname = nickname;
+	}
+
+	public Client(String name, String nickname, String address, String postalcode, String city, String number) {
+		super();
+		this.name = name;
+		this.nickname = nickname;
+		this.address = address;
+		this.postalcode = postalcode;
+		this.city = city;
+		this.number = number;
 	}
 
 	public Long getId() {
@@ -56,9 +78,51 @@ public class Client {
 		this.nickname = nickname;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostalcode() {
+		return postalcode;
+	}
+
+	public void setPostalcode(String postalcode) {
+		this.postalcode = postalcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getAccompte() {
+		return accompte;
+	}
+
+	public void setAccompte(String accompte) {
+		this.accompte = accompte;
+	}
+
 	@Override
 	public String toString() {
-		return "Client [name=" + name + ", nickname=" + nickname + "]";
+		return "Client [id=" + id + ", name=" + name + ", nickname=" + nickname + ", address=" + address
+				+ ", postalcode=" + postalcode + ", city=" + city + ", number=" + number + ", accompte=" + accompte
+				+ "]";
 	}
 
 }
